@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CFN to create ManagedPolicy 
+
+Resources:
+  IBDSReconUserBoundaryPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties: 
+      Description: A ManagedPolicy meant to restrict user based upon ingress IP.
+      ManagedPolicyName: my_s3_user_boundary
+      Path: /
+      Users:
+      - my_s3_user
+      PolicyDocument: 
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+              - s3:ListBucket
+              - s3:GetBucketLocation
+              Resource: arn:aws:s3:::my-randon-s3-bucket
+            - Effect: Allow
+              Action:
+              - s3:PutObject
+              - s3:PutObjectAcl
+              Resource: arn:aws:s3:::my-randon-s3-bucketa/bucketfiles/*
+              Condition:
+                IpAddressIfExists:
+                  aws:SourceIp: 123.345.657.12
