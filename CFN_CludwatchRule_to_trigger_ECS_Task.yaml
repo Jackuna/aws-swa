@@ -70,7 +70,7 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
       Policies:
-      - PolicyName: !Sub "${ProductName}-${Region}-${CNEnvironment}-${ProjectName}-role-inlinePolicy"
+      - PolicyName: !Sub "${ProductName}-${Region}-${Environment}-${ProjectName}-role-inlinePolicy"
         PolicyDocument: 
             Version: 2012-10-17
             Statement:
@@ -94,7 +94,7 @@ Resources:
       ScheduleExpression: !Ref CWEventRuleCron
       State: ENABLED
       Targets:
-        - Id: !Sub "${ProductName}-${Region}-${CNEnvironment}-${ProjectName}-daily-event-rule-targetId"
+        - Id: !Sub "${ProductName}-${Region}-${Environment}-${ProjectName}-daily-event-rule-targetId"
           EcsParameters:
             LaunchType: EC2
             TaskDefinitionArn: !Ref TaskDefinition
