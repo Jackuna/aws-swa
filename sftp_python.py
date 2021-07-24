@@ -88,7 +88,7 @@ def sftp_transport():
         for file_name in file_list:
             dt = datetime.now()
 
-            prefix = dt.strftime('pod%m%d%y')
+            prefix = dt.strftime('daily%m%d%y')
 
             #print(download_dict[today].keys())
             if bool(re.fullmatch(prefix + '[0-9]{4,5}.tar', file_name)) and (file_name not in download_dict[today].keys()):
@@ -137,6 +137,6 @@ def sftp_transport():
         logging.error(ssherror)
 
 
-remove_old_artifacts('pod061421')
+remove_old_artifacts('daily061421')
 sftp_transport()
 #print_data()
