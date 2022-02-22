@@ -1,0 +1,6 @@
+---
+# vars file for lambda_project
+# default variables
+#
+region: my-region
+

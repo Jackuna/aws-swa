@@ -1,0 +1,32 @@
+---
+- name: Git Init..
+  command: >
+    git init
+- name: Git add recent changes..
+  command: >
+    git add --all src
+- name: Git Checkout to default branch
+  command: >
+    git checkout -b lambda_function_deployer
+- name: Git add remote origin..
+  command: >
+    git remote add origin https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git
+- name: Git Config username..
+  command: >
+    git config user.name CiCd
+- name: Git Config email..
+  command: >
+    git config user.email jackuna@cyberkeeda.com 
+- name: Git commit recent changes..
+  command: >
+    git commit -m "Updated Latest code"
+
+- name: Git push recent changes..
+  command:
+    argv:
+      - git 
+      - push 
+      - --force
+      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git 
+      - -u 
+      - lambda_function_deployer

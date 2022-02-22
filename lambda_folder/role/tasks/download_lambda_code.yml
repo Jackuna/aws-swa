@@ -1,0 +1,13 @@
+---
+
+- name: Read Variables
+  include_vars:
+    file: "role/vars/{{ env }}/main.yml"
+
+- name: Download Lambda Function using Python script..
+  command:
+    argv:
+      - python3 
+      - download_lambda.py 
+      - src
+      - "{{ function_name }}"

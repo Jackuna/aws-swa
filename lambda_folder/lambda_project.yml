@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+      
+  tasks:   
+    - name: Read Variables
+      include_vars:
+        file: "lambda_project/vars/{{ env }}/main.yml"
+
+    - name: Download Lambda Function using Python script..
+      command:
+        argv:
+          - python3 
+          - download_lambda.py 
+          - lambda_folder
+          - "{{ function_name }}"
+
+      
+
+
+
+
