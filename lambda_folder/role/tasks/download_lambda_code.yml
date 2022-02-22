@@ -8,6 +8,6 @@
   command:
     argv:
       - python3 
-      - download_lambda.py 
+      - role/files/download_lambda.py 
       - src
       - "{{ function_name }}"
