@@ -1,11 +1,14 @@
 ---
 - name: Git clone source repository..
-  command: >
-    git clone https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git -b lambda_deployer
-- name: Git clone source repository..
-  command: > 
-    ls -ltr
-- name: Git add new files to repo..
+  command:
+    argv:
+      - git 
+      - clone 
+      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git 
+      - -b 
+      - lambda_deployer
+
+- name: Git add Lambda function source code to repo..
   command: >
     cp -r src aws-swa/lambda_folder
 
@@ -14,6 +17,7 @@
     git add --all lambda_folder/src
   args:
     chdir: aws-swa
+
 - name: Git Config username..
   command: >
     git config user.name {{ git_username }}
