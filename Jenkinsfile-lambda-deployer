@@ -1,0 +1,43 @@
+def gituser = env.GIT_USERNAME
+def gituserpass = env.GIT_PASSWORD
+def ACCESS_KEY = env.AWS_ACCESS_KEY
+def KEY_ID = env.AWS_SECRET_ACCESS_KEY
+
+
+node('master'){
+  
+  try {
+
+    stage('Git Checkout'){
+            checkout scm
+            sh "git checkout lambda_deployer"
+        }
+
+     stage('build'){
+                  sh "ls -ltr"
+                   echo "Building docker image via dockerfile..."
+                   sh "docker build  -t ansible:2.10-$BUILD_ID ."
+                  }
+
+     stage('deploy'){
+                    echo "Infrastructure deployment started...."
+                    wrap([$class: "MaskPasswordsBuildWrapper",
+                          varPasswordPairs: [[password: gituserpass, var: gituserpass] ]]) {
+                    sh "docker run --rm \
+                        -e gituser=$gituser \
+                        -e gituserpass=$gituserpass \
+                        -e AWS_ACCESS_KEY_ID=$ACCESS_KEY \
+                        -e AWS_SECRET_ACCESS_KEY=$KEY_ID \
+                        -e AWS_DEFAULT_REGION='ap-south-1' \
+                        ansible:2.10-$BUILD_ID ansible-playbook -vvv  --extra-vars 'env=dev1 git_username=${gituser} token=${gituserpass}' lambda_folder/root_lambda_project.yml"
+                      }
+                    }          
+      }
+
+
+            
+  catch (e){
+    echo "Error occurred - " + e.toString()
+    throw e
+    } 
+  }
