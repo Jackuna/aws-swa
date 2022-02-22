@@ -1,7 +1,7 @@
 ---
 - name: Git clone source repository..
   command: >
-    git clone https://jackuna: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@github.com/Jackuna/aws-swa.git -b lambda_deployer
+    git clone https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git -b lambda_deployer
 - name: Git clone source repository..
   command: > 
     ls -ltr
