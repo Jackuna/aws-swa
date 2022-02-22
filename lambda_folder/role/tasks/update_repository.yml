@@ -4,9 +4,7 @@
     argv:
       - git 
       - clone 
-      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git 
-      - b 
-      - lambda_deployer
+      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git -b lambda_deployer
 
 - name: Git add new files to repo..
   command: >
