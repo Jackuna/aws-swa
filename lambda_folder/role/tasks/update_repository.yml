@@ -16,13 +16,13 @@
     chdir: aws-swa
 - name: Git Config username..
   command: >
-    git config user.name CiCd
+    git config user.name {{ git_username }}
   args:
     chdir: aws-swa
 
 - name: Git Config email..
   command: >
-    git config user.email jackuna@cyberkeeda.com 
+    git config user.email {{ git_username }}@cyberkeeda.com 
   args:
     chdir: aws-swa  
 - name: Git commit recent changes..
