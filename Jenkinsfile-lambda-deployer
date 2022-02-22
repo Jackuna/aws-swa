@@ -2,7 +2,7 @@ def gituser = env.GIT_USERNAME
 def gituserpass = env.GIT_PASSWORD
 def ACCESS_KEY = env.AWS_ACCESS_KEY
 def KEY_ID = env.AWS_SECRET_ACCESS_KEY
-
+def DEBUG_MODE = env.LOG_TYPE
 
 node('master'){
   
@@ -29,7 +29,7 @@ node('master'){
                         -e AWS_ACCESS_KEY_ID=$ACCESS_KEY \
                         -e AWS_SECRET_ACCESS_KEY=$KEY_ID \
                         -e AWS_DEFAULT_REGION='ap-south-1' \
-                        ansible:2.10-$BUILD_ID ansible-playbook -vvv  --extra-vars 'env=dev1 git_username=${gituser} token=${gituserpass}' lambda_folder/root_lambda_project.yml"
+                        ansible:2.10-$BUILD_ID ansible-playbook -$DEBUG_MODE  --extra-vars 'env=dev1 git_username=${gituser} token=${gituserpass}' lambda_folder/root_lambda_project.yml"
                       }
                     }          
       }
