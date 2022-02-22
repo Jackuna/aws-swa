@@ -45,6 +45,4 @@
       - lambda_deployer
   args:
     chdir: aws-swa
-  register: git_push_output
-  failed_when: "Fatal" not in git_push_output.stdout or "Error" not in git_push_output.stdout
-  
+  register: git_push_output  
