@@ -1,3 +1,5 @@
 ---
 region: us-east-1
 function_name: ewfeew
+git_repo_name: aws-swa
+git_repo_branch: lambda_deployer

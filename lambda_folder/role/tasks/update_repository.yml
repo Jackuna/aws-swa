@@ -4,45 +4,45 @@
     argv:
       - git 
       - clone 
-      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git 
+      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/{{ git_repo_name }}.git 
       - -b 
-      - lambda_deployer
+      - "{{ git_repo_branch }}"
 
 - name: Git add Lambda function source code to repo..
   command: >
-    cp -r src aws-swa/lambda_folder
+    cp -r src {{ git_repo_name }}/lambda_folder
 
 - name: Git add recent changes..
   command: >
     git add --all lambda_folder/src
   args:
-    chdir: aws-swa
+    chdir: "{{ git_repo_name }}"
 
 - name: Git Config username..
   command: >
     git config user.name {{ git_username }}
   args:
-    chdir: aws-swa
+    chdir: "{{ git_repo_name }}"
 
 - name: Git Config email..
   command: >
     git config user.email {{ git_username }}@cyberkeeda.com 
   args:
-    chdir: aws-swa  
+    chdir: "{{ git_repo_name }}"  
 - name: Git commit recent changes..
   command: >
     git commit -m "Updated Latest code"
   args:
-    chdir: aws-swa
+    chdir: "{{ git_repo_name }}"
 
 - name: Git push recent changes..
   command:
     argv:
       - git 
       - push 
-      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git 
+      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/{{ git_repo_name }}.git 
       - -u 
-      - lambda_deployer
+      - "{{ git_repo_branch }}"
   args:
-    chdir: aws-swa
+    chdir: "{{ git_repo_name }}"
   register: git_push_output  
