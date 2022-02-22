@@ -40,4 +40,9 @@ node('master'){
     echo "Error occurred - " + e.toString()
     throw e
     } 
+  finally {
+    deleteDir()
+       
+            sh 'docker rmi -f ansible:2.10-$BUILD_ID  && echo "ansible:2.10-$BUILD_ID local image deleted."'
   }
+}
