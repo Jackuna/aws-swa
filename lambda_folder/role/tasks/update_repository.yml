@@ -1,5 +1,5 @@
 ---
-- name: Git Init..
+- name: Git Init for local repository..
   command: >
     git init
 - name: Git add recent changes..
@@ -26,7 +26,6 @@
     argv:
       - git 
       - push 
-      - --force
       - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git 
       - -u 
       - lambda_function_deployer
