@@ -46,9 +46,5 @@
   args:
     chdir: aws-swa
   register: git_push_output
-
-- name: Git push recent changes..
-  debug:
-    msg: "Nothing to Commit"
-  when: "'nothing' in git_push_output.stdout"
+  failed_when: "Fatal" not in git_push_output.stdout or "Error" not in git_push_output.stdout
   
