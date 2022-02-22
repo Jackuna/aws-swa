@@ -7,7 +7,7 @@
     ls -ltr
 - name: Git add new files to repo..
   command: >
-    cp -r lambda_folder aws-swa
+    cp -r src aws-swa/lambda_folder
 
 - name: Git add recent changes..
   command: >
