@@ -11,7 +11,7 @@
 
 - name: Git add recent changes..
   command: >
-    git add --all src
+    git add --all lambda_folder/src
   args:
     chdir: aws-swa
 
