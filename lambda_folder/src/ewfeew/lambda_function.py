@@ -4,7 +4,7 @@ from userapi.list_user import *
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-
+# Need to create a blog for the same.
 def lambda_handler(event, context):
 
     if (event['httpMethod']) == "POST":
