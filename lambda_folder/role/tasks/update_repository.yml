@@ -1,11 +1,7 @@
 ---
 - name: Git clone source repository..
-  command:
-    argv:
-      - git 
-      - clone 
-      - https://{{ git_username }}:{{ token }}@github.com/Jackuna/aws-swa.git -b lambda_deployer
-
+  command: >
+    git clone https://jackuna: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@github.com/Jackuna/aws-swa.git -b lambda_deployer
 - name: Git add new files to repo..
   command: >
     cp -r lambda_folder aws-swa
