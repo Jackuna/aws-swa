@@ -14,7 +14,17 @@
     git add --all lambda_folder/src
   args:
     chdir: aws-swa
+- name: Git Config username..
+  command: >
+    git config user.name CiCd
+  args:
+    chdir: aws-swa
 
+- name: Git Config email..
+  command: >
+    git config user.email jackuna@cyberkeeda.com 
+  args:
+    chdir: aws-swa  
 - name: Git commit recent changes..
   command: >
     git commit -m "Updated Latest code"
