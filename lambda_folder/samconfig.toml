@@ -1,0 +1,35 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "default-lambda-deployer-with-sam-Stack"
+s3_bucket = "9-bucket"
+s3_prefix = "sam-lambda-stack"
+region = "ap-south-1"
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
+
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
+stack_name = "dev-lambda-deployer-with-sam-Stack"
+s3_bucket = "9-bucket"
+s3_prefix = "dev-sam-lambda-stack"
+region = "ap-south-1"
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
+parameter_overrides = "Environment=\"dev\""
+
+[uat]
+[uat.deploy]
+[uat.deploy.parameters]
+stack_name = "uat-lambda-deployer-with-sam-Stack"
+s3_bucket = "9-bucket"
+s3_prefix = "uat-sam-lambda-stack"
+region = "ap-south-1"
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+image_repositories = []
+parameter_overrides = "Environment=\"uat\""
