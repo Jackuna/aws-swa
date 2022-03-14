@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+
+Parameters:
+  Environment:
+    Description:    Please specify the target environment.
+    Type:           String
+    Default:        "dev"
+    AllowedValues:
+      - dev
+      - uat
+  AppName:
+    Description:  Application name.
+    Type:         String
+    Default:      "find-port-status"
+
+Mappings:
+  EnvironmentMap:
+    dev:
+     IAMRole: 'arn:aws:iam::897248824142:role/service-role/vpclambda-role-27w9b8uq'
+    uat:
+      IAMRole: 'arn:aws:iam::897248824142:role/service-role/vpclambda-role-27w9b8uq'
+    stg:
+      IAMRole: 'arn:aws:iam::897248824142:role/service-role/vpclambda-role-27w9b8uq'
+
+Resources:
+  LambdabySam:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: !Sub 'ck-${Environment}-${AppName}'
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: src/
+      Description: 'Lambda Created by SAM template'
+      MemorySize: 128
+      Timeout: 3
+      Role: !FindInMap [EnvironmentMap, !Ref Environment, IAMRole]
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-a0f856da
+        SubnetIds:
+          - subnet-e9c898a5
+          - subnet-bdbb59d6
+      Environment:
+        Variables:
+          Name: !Sub 'ck-${Environment}-${AppName}'
+          Owner: CyberkeedaAdmin
+      Tags:
+        Name: !Sub 'ck-${Environment}-${AppName}'
+        Owner: CyberkeedaAdmin
